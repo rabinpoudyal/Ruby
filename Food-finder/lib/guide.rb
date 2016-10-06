@@ -1,5 +1,11 @@
 require 'restaurant'
+
 class Guide
+
+  class Options
+    @@actions = ['list','find','add','quit']
+    def self.action;@@actions;end
+  end
 
   def initialize(path=nil) #initialize guide object
     #Lets locate the resturant text file path
@@ -14,7 +20,42 @@ class Guide
     end
   end
 
+  def get_action
+    choice = nil
+    #loop
+    until Guide::Options.action.include?(choice)
+      puts "You can perform these actions: #{Guide::Options.action.join(',')} " if choice
+      print "> "
+      query = gets.chomp
+      choice = query.downcase.strip #downcase and remove the spaces
+    end
+    return choice
+  end
+
   def launch!
+    introduction #Give the welcome message
+    #Now we need a action loop
+    result = nil
+    until result == :quit do
+      user_response = get_action
+      result = action(user_response)
+    end
+    conclusion #Give the goodbye message
+  end
+
+  def action(user_response)
+    case user_response
+    when "list"
+      puts "Listing.."
+    when "find"
+      puts "Finding"
+    when "add"
+      puts "Adding"
+    when "quit"
+      return :quit
+    else
+      puts "\n Sorry I don't understand the command \n"
+    end
   end
 
   def introduction
