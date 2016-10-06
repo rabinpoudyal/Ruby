@@ -8,6 +8,26 @@ class Restaurant
     @@filepath = File.join(APP_ROOT, path)
   end
 
+  def initialize(args={}) # initailize a empty in case user does not pass anything
+    @name   =  args[:name]  || "" #set default to empty string
+    @cusine = args[:cusine] || ""
+    @price  = args[:price]  || ""
+  end
+
+  def self.ask_questions
+    args = {}
+
+    print "\n Enter resturant name: "
+    args[:name] = gets.chomp.strip
+    print "\n Enter cusine: "
+    args[:cusine] = gets.chomp.strip
+    print "\n Enter price($): "
+    args[:price] = gets.chomp.strip
+
+    return self.new(args)
+  end
+
+
   def self.file_exists?
     if @@filepath && File.exists?(@@filepath)
       return true

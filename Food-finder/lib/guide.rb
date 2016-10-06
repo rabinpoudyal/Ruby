@@ -61,15 +61,7 @@ class Guide
   def add
     puts "\nAdding the new Restaurant\n".upcase
 
-    restaurant = Restaurant.new
-
-    print "\n Enter resturant name: "
-    restaurant.name = gets.chomp.strip
-    print "\n Enter cusine: "
-    restaurant.cusine = gets.chomp.strip
-    print "\n Enter price($): "
-    restaurant.price = gets.chomp.strip
-
+    restaurant = Restaurant.ask_questions
     if restaurant.save
       puts "Resturant Saved!"
     else
