@@ -2,6 +2,8 @@ class Restaurant
 
   @@filepath = nil #Class Variable
 
+  attr_accessor :name, :cusine, :price #Inst. variable
+
   def self.filepath=(path=nil)
     @@filepath = File.join(APP_ROOT, path)
   end
@@ -29,6 +31,14 @@ class Restaurant
 
   def self.saved_resturants
 
+  end
+
+  def save
+    return false unless Restaurant.file_usable? # we need to put Resturant for calling the instance method
+    File.open('restautant.txt','a') do |file|
+      file.puts ([@name,@cusine,@price].join("\t")) + "\n"
+    end
+    return true #return true if writing was successful
   end
 
 end

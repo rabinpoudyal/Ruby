@@ -50,11 +50,30 @@ class Guide
     when "find"
       puts "Finding"
     when "add"
-      puts "Adding"
+      add
     when "quit"
       return :quit
     else
       puts "\n Sorry I don't understand the command \n"
+    end
+  end
+
+  def add
+    puts "\nAdding the new Restaurant\n".upcase
+
+    restaurant = Restaurant.new
+
+    print "\n Enter resturant name: "
+    restaurant.name = gets.chomp.strip
+    print "\n Enter cusine: "
+    restaurant.cusine = gets.chomp.strip
+    print "\n Enter price($): "
+    restaurant.price = gets.chomp.strip
+
+    if restaurant.save
+      puts "Resturant Saved!"
+    else
+      puts "Sorry something went worong"
     end
   end
 
